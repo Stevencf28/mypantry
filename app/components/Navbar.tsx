@@ -4,7 +4,6 @@ import { Switch } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ThemeContext } from "../context/Contexts";
 
 interface NavbarProps {
 	children: React.ReactNode;
@@ -37,51 +36,50 @@ export default function Navbar({ children }: NavbarProps) {
 
 	return (
 		<>
-			<ThemeContext.Provider value={theme}>
-				<div id="nav">
-					{/* Top nav */}
-					<nav
-						className={` h-14 border-b-2 ${
-							theme === "dark"
-								? "dark bg-[url(/img/dark.png)]"
-								: "light bg-[url(/img/light.webp)]"
-						}
+			<div id="nav">
+				{/* Top nav */}
+				<nav
+					className={` h-14 border-b-2 ${
+						theme === "dark"
+							? "dark bg-[url(/img/dark.png)]"
+							: "light bg-[url(/img/light.webp)]"
+					}
 					transition-all duration-200
 					`}
-					>
-						<div className="flex flex-row px-6 w-full h-full justify-between items-center">
-							{/* left side */}
-							<div className="flex flex-row gap-x-4 w-full">
-								<button
-									onClick={() => setOpen((open) => !open)}
-									className="cursor-pointer hover:bg-black/40 rounded-lg p-2"
-								>
-									<Bars3Icon className="size-8 transition-all duration-200" />
-								</button>
-								<button className="hover:bg-black/40 rounded-lg p-2">
-									<Link
-										href={"/"}
-										className="text-xl transition-all duration-200"
-									>
-										My Pantry
-									</Link>
-								</button>
-							</div>
-							{/* right side */}
-							<div className="flex flex-row gap-x-4">
+				>
+					<div className="flex flex-row px-6 w-full h-full justify-between items-center">
+						{/* left side */}
+						<div className="flex flex-row gap-x-4 w-full">
+							<button
+								onClick={() => setOpen((open) => !open)}
+								className="cursor-pointer hover:bg-black/40 rounded-lg p-2"
+							>
+								<Bars3Icon className="size-8 transition-all duration-200" />
+							</button>
+							<button className="hover:bg-black/40 rounded-lg p-2">
 								<Link
-									className="hover:bg-black/40 rounded-lg p-2 text-xl transition-all duration-200"
-									href={"/login"}
+									href={"/"}
+									className="text-xl transition-all duration-200"
 								>
-									Login
+									My Pantry
 								</Link>
-							</div>
+							</button>
 						</div>
-					</nav>
-					<div className="flex flex-row">
-						{/* Side nav */}
-						<div
-							className={`x h-[calc(100vh-3.5rem)] relative transition-all duration-200   
+						{/* right side */}
+						<div className="flex flex-row gap-x-4">
+							<Link
+								className="hover:bg-black/40 rounded-lg p-2 text-xl transition-all duration-200"
+								href={"/login"}
+							>
+								Login
+							</Link>
+						</div>
+					</div>
+				</nav>
+				<div className="flex flex-row">
+					{/* Side nav */}
+					<div
+						className={`x h-[calc(100vh-3.5rem)] relative transition-all duration-200   
 							${open ? "w-40" : "w-0"}
 							${
 								theme === "dark"
@@ -89,50 +87,49 @@ export default function Navbar({ children }: NavbarProps) {
 									: "light bg-[url(/img/light.webp)]"
 							}
 							`}
+					>
+						<div
+							className={` pt-4 flex flex-col justify-evenly relative transition-all duration-200 ${
+								open ? "translate-x-0" : "translate-x-[-145px]"
+							}`}
 						>
-							<div
-								className={` pt-4 flex flex-col justify-evenly relative transition-all duration-200 ${
-									open ? "translate-x-0" : "translate-x-[-145px]"
-								}`}
-							>
-								{links.map((link) => (
-									<div className="mb-2 w-full " key={link.href}>
-										<button className="w-40">
-											<Link href={link.href}>
-												<h2 className="overflow-hidden text-center hover:bg-black/40 rounded-lg p-2">
-													{link.name}
-												</h2>
-											</Link>
-										</button>
-									</div>
-								))}
-								{/* dark mode switch */}
-								<div className="flex flex-row w-full justify-center items-center">
-									<Switch
-										checked={theme === "dark"}
-										onChange={() => {
-											toggleTheme();
-										}}
-										className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-black cursor-pointer mr-2"
-									>
-										<span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
-									</Switch>
-									<h3 className="font-semibold">Dark Mode</h3>
+							{links.map((link) => (
+								<div className="mb-2 w-full " key={link.href}>
+									<button className="w-40">
+										<Link href={link.href}>
+											<h2 className="overflow-hidden text-center hover:bg-black/40 rounded-lg p-2">
+												{link.name}
+											</h2>
+										</Link>
+									</button>
 								</div>
+							))}
+							{/* dark mode switch */}
+							<div className="flex flex-row w-full justify-center items-center">
+								<Switch
+									checked={theme === "dark"}
+									onChange={() => {
+										toggleTheme();
+									}}
+									className="group inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition data-[checked]:bg-black cursor-pointer mr-2"
+								>
+									<span className="size-4 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-6" />
+								</Switch>
+								<h3 className="font-semibold">Dark Mode</h3>
 							</div>
 						</div>
-						<div
-							id="children"
-							className={`relative w-full transition-all duration-200 
+					</div>
+					<div
+						id="children"
+						className={`relative w-full transition-all duration-200 
 							${open ? "w-[calc(100%-10rem)]" : "w-full"}
 							${theme === "dark" ? "dark" : "light"}
 						`}
-						>
-							{children}
-						</div>
+					>
+						{children}
 					</div>
 				</div>
-			</ThemeContext.Provider>
+			</div>
 		</>
 	);
 }
