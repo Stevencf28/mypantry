@@ -54,13 +54,10 @@ export default function Navbar({ children }: NavbarProps) {
 								onClick={() => setOpen((open) => !open)}
 								className="cursor-pointer hover:bg-black/40 rounded-lg p-2"
 							>
-								<Bars3Icon className="size-8 transition-all duration-200" />
+								<Bars3Icon className="size-8" />
 							</button>
 							<button className="hover:bg-black/40 rounded-lg p-2">
-								<Link
-									href={"/"}
-									className="text-xl transition-all duration-200"
-								>
+								<Link href={"/"} className="text-xl">
 									My Pantry
 								</Link>
 							</button>
@@ -68,7 +65,7 @@ export default function Navbar({ children }: NavbarProps) {
 						{/* right side */}
 						<div className="flex flex-row gap-x-4">
 							<Link
-								className="hover:bg-black/40 rounded-lg p-2 text-xl transition-all duration-200"
+								className="hover:bg-black/40 rounded-lg p-2 text-xl"
 								href={"/login"}
 							>
 								Login
@@ -89,7 +86,7 @@ export default function Navbar({ children }: NavbarProps) {
 							`}
 					>
 						<div
-							className={` pt-4 flex flex-col justify-evenly relative transition-all duration-200 ${
+							className={` pt-4 flex flex-col justify-evenly relative  ${
 								open ? "translate-x-0" : "translate-x-[-145px]"
 							}`}
 						>
@@ -105,7 +102,7 @@ export default function Navbar({ children }: NavbarProps) {
 								</div>
 							))}
 							{/* dark mode switch */}
-							<div className="flex flex-row w-full justify-center items-center">
+							<div className="flex flex-col w-full justify-center items-center">
 								<Switch
 									checked={theme === "dark"}
 									onChange={() => {
