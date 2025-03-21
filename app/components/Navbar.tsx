@@ -118,9 +118,10 @@ export default function Navbar({ children }: NavbarProps) {
 					</div>
 					<div
 						id="children"
-						className={`relative w-full transition-all duration-200 
-							${open ? "w-[calc(100%-10rem)]" : "w-full"}
+						className={`relative transition-all duration-200 
+							${open ? "max-w-screen overflow-x-hidden w-full" : "w-screen"}
 							${theme === "dark" ? "dark" : "light"}
+							
 						`}
 					>
 						{children}
